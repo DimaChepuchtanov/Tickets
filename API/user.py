@@ -64,6 +64,8 @@ user = {"0":
         }
 
 
+
+
 def update(userInfo, newData):
     if userInfo in user:
         value = user[userInfo]['storyBuy']
@@ -91,6 +93,7 @@ def read_one(userInfo):
 
 def create(person):
     """Создание нового пользователя"""
+    print(person)
 
     for key, value in user.items():
         if value["FIO"] == person['FIO']:
