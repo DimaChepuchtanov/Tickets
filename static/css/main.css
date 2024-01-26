@@ -1,0 +1,42 @@
+.center-logo{
+    display: flex;
+    justify-content: center;
+    margin-top: 4%
+}
+
+.blockquote{
+    font-size: 1.5vw
+}
+
+.blockquote-footer{
+    font-size: 1.2vw
+}
+
+.main-content{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 0.3vw;
+    background-color: ghostwhite;
+}
+
+.information-main{
+    background-color: red;
+    margin-top: 2%;
+    box-shadow: 0vw 0vw 2vw 0vw #00000059
+}
+
+#discribe{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#image{
+    display: flex;
+    justify-content: flex-end;
+    flex-basis: 50%
+}
+
+#image img{
+    width: 92%;
+}
