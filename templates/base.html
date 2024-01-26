@@ -13,9 +13,11 @@
 
     <link rel="stylesheet" href="/static/css/base.css">
     <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
+    
     <title>WayFinder</title>
 </head>
-<body>
+<body style="display: flex;">
     <div class="container header">
         <div class="icon container">
             <img id="img" src="/static/img/iconSite.png">
@@ -36,22 +38,59 @@
         </div>
         {% if user == "None" %}
             <div class="dropdown" style="display: flex">
-                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img id="img" src="/static/img/NoNameProfile.png">
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Действие</a></li>
-                    <li><a class="dropdown-item" href="#">Другое действие</a></li>
-                    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+                <img class="bt-list-profile" id="img" src="/static/img/NoNameProfile.png" onclick="myFunction()" >
+                <ul class="dropdown-menu" id="myDropdown">
+                    <li><a class="dropdown-item" href="#">Регистрация</a></li>
+                    <li><a class="dropdown-item" href="#">Авторизация</a></li>
                 </ul>
             </div>
         {% endif %}
+        {% if user == "man" %}
+            <div class="dropdown" style="display: flex">
+                <img class="bt-list-profile" id="img" src="/static/img/profileMan.png" onclick="myFunction()" >
+                <ul class="dropdown-menu" id="myDropdown">
+                    <li><a class="dropdown-item" href="/web/profile/{{userName}}">Профиль</a></li>
+                    <li><a class="dropdown-item" href="#">Бонус</a></li>
+                    <li><a class="dropdown-item" href="#">История</a></li>
+                </ul>
+            </div>
+        {% endif %}
+        {% if user == "woman" %}
+            <div class="dropdown" style="display: flex">
+                <img class="bt-list-profile" id="img" src="/static/img/NoNameProfile.png" onclick="myFunction()" >
+                <ul class="dropdown-menu" id="myDropdown">
+                    <li><a class="dropdown-item" href="#">Регистрация</a></li>
+                    <li><a class="dropdown-item" href="#">Авторизация</a></li>
+                </ul>
+            </div>
+        {% endif %}
+
+        <script>
+            function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.bt-list-profile')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-menu");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+        </script>
     </div>
     <div>
         {% include includes %}
     </div>
     <div class="footer">
-        <div>
+        <div class="main-info">
             <div class="social">
                 <div>
                     <p>Мы в социальных сетях</p>
@@ -64,7 +103,7 @@
                     <p>Документы</p>
                     <p>Разрешение на ведение бизнеса</p>
                     <p>Директор</p>
-                    <p>Соглашение на использование данных</p>
+                    <p>Политика покупки билетов</p>
                 </div>
             </div>
             <div class="official-address">

@@ -13,14 +13,14 @@
 }
 
 .main-content{
-    margin-top: 5%;
     margin-bottom: 5%;
     padding: 0.3vw;
-    background-color: ghostwhite;
+    margin-left: 10%;
+    margin-right: 10%
 }
 
 .information-main{
-    background-color: red;
+    background-color: #ff6565bd;
     margin-top: 2%;
     box-shadow: 0vw 0vw 2vw 0vw #00000059
 }
@@ -28,7 +28,8 @@
 #discribe{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
+    cursor: pointer;
 }
 
 #image{

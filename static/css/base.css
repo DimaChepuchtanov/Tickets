@@ -2,6 +2,16 @@ p{
     margin:0
 }
 
+html{
+    height: 100%;
+}
+body{
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url('/static/img/file62917.jpeg');
+    height: 100%;
+}
+
 a{
    text-decoration: none;
    color: black;
@@ -36,7 +46,7 @@ a:hover{
 
 .nav div{
     margin-left: 30px;
-    font-size: 2.45vw;
+    font-size: 1.56vw;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -45,12 +55,12 @@ a:hover{
 
 
 .dropdown{
-    flex-basis: 10%;
+    flex-basis: 5%;
 }
 
 
 .dropdown #img{
-    width: 62%;
+    width: 100%;
 }
 
 .footer{
@@ -60,25 +70,23 @@ a:hover{
 
 }
 
-
-.footer div{
+.footer .main-info{
     display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    
+    justify-content: space-around;
 }
 
 .footer .social, .footer .document, .footer .official-address{
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
     flex-wrap: wrap;
     
 }
 
 .footer #author-code{
+    display: flex;
     flex-direction: column;
-    border-top: 1px outset black
+    border-top: 1px outset black;
+    align-content: center;
+    flex-wrap: wrap;
 }

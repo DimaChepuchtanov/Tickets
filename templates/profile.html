@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="profile">
+        <div style="display: flex; justify-content: center;">
+            {% if user == 'man' %}
+            <div style="flex-basis: 20%">
+                <img src="/static/img/profileMan.png" style="width: 100%;">
+            </div>
+            
+            {% endif %}
+            <div id="profile-info" style="flex-basis: 50%">
+                {% for key in profile %}
+                    <p>{{key}}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; flex-direction: column; align-content: center; flex-wrap: wrap;">
+            <p class="h3" style="text-align: center; margin-top: 3%; font-family: 'Trebuchet MS';">Авторские посты</p>
+            <div class="story-post" style="display: flex">
+                <div class="card" style="width: 18rem;">
+                    <img src="/static/img/1626777366_21-kartinkin-com-p-peizazhi-iz-anime-khayao-miyadzaki-anime-k-31.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Почему именно мы:</h5>
+                      <p class="card-text">Путешествие - это непросто поездка от точки А до точки Б. Это впечатления от самой поездки.
+                        Красоты природы, качественное обслуживание, комфорт и это не весь спектор услуг, который мы предоставляем</p>
+                      <a href="/web/main/post/1" class="btn btn-primary">Читать статью...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

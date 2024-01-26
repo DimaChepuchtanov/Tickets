@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="center-logo">
+        <figure class="text-center">
+            <blockquote class="blockquote">
+              <p>❝ Мир вовсе не в твоих книгах и картах. Он вон там, за окном...❝</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Путешествуй вместе с <cite>WayFinder</cite>
+        </figcaption>
+    </div>
+
+    <div>
+    </div>
+    <div style="background-color: wheat; margin-bottom: 4%; padding: 3%; margin-left: 15%; margin-right: 15%">
+        <div style="display: flex">
+            <span>Этот вопрос вполне логичен, если вы стоите перед выбором покупки билетов на транспорт. Мы понимаем, что существует множество компаний, предлагающих свои услуги, и все они стремятся привлечь ваше внимание. Но давайте рассмотрим, почему именно мы - лучший выбор для вас.</span>
+            <img src="{{url}}" style="width: 40%;">
+        </div>
+        <br/>
+        <div>
+            {% for text in content %}
+                <span>{{text}}</span>
+                <br/>
+                <br/>
+            {% endfor %}
+        </div>
+        <a href="/web/main"><p><-- Вернуться назад</p></a>
+    </div>
+</div>
