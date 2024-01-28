@@ -98,14 +98,17 @@ paths:
       responses:
         "200":
           description: "Успешно"
+  /avia/{language}:
     get:
-      operationId: "transport.all_marshurts_avia"
-      tags:
-        - "Авиабилеты"
-      summary: "Просмотр всех авиабилетов"
-      responses:
-        "200":
-          description: "Успешно"
+        operationId: "transport.all_marshurts_avia"
+        tags:
+          - "Авиабилеты"
+        parameters:
+          - $ref: "#/components/parameters/language"
+        summary: "Просмотр всех авиабилетов"
+        responses:
+          "200":
+            description: "Успешно"
   /avia/{idWay}:
     put:
       tags:
@@ -454,6 +457,13 @@ components:
       required: True
       schema:
         type: "integer"
+    language:
+      name: "language"
+      description: "-"
+      in: path
+      required: True
+      schema:
+        type: "string"
 
 
 

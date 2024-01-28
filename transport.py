@@ -5,7 +5,10 @@
 
 from flask import abort
 from datetime import datetime
+from pprint import pprint
+from database import connect as cn
 
+cursor = cn.cursor()
 """Данные по Авиабилетам"""
 
 marshrut_air = {
@@ -60,11 +63,43 @@ marshrut_train = {}
 marshrut_bus = {}
 
 
+def all_marshurts_avia(language):
+    """Функция получения всех маршрутов авиа
 
-def all_marshurts_avia():
-    """Функция получения всех маршрутов авиа"""
+        Список абсолютно всех билетов
+    """
+    tickets = {}
 
-    return list(marshrut_air.values())
+    if language == "en":
+        cursor.execute("SELECT * FROM ticketairen")
+        answer = cursor.fetchall()
+
+        for i in answer:
+            tickets[i[0]] = {"Start": i[1],
+                             "End": i[2],
+                             "Start-Date": i[3].isoformat(),
+                             "End-Date": i[4].isoformat(),
+                             "Start-Time": i[5].isoformat(),
+                             "End-Time": i[6].isoformat(),
+                             "Price": i[7]}
+
+        answer = tickets.values()
+    else:
+        cursor.execute("SELECT * FROM ticketairru")
+        answer = cursor.fetchall()
+
+        for i in answer:
+            tickets[i[0]] = {"Start": i[1],
+                             "End": i[2],
+                             "Start-Date": i[3].isoformat(),
+                             "End-Date": i[4].isoformat(),
+                             "Start-Time": i[5].isoformat(),
+                             "End-Time": i[6].isoformat(),
+                             "Price": i[7]}
+        
+        answer = tickets.values()
+
+    return list(answer)
 
 
 def all_marshutrs_train():
@@ -82,17 +117,84 @@ def all_marshurts_bus():
 def insert_marshrut_avia(newMarshrut):
     """Функция добаления нового маршрута авиа"""
 
-    for key, value in marshrut_air.items():
-        if value["en"] == newMarshrut['en'] and value['ru'] == newMarshrut['ru']:
-            abort(400, "Маршрут уже создан")
 
-    keys = int(list(marshrut_air.keys())[-1]) + 1
+    cursor.execute(f"""SELECT id
+                      FROM ticketairen
+                      WHERE start = '{newMarshrut['en']['start']}' AND 
+                            "end" = '{newMarshrut['en']['end']}' AND
+                            "startDate" = '{datetime.strptime(newMarshrut['en']['start-date'], '%Y-%m-%d').date()}' AND
+                            "endDate" = '{datetime.strptime(newMarshrut['en']['end-date'], '%Y-%m-%d').date()}' AND
+                            "price" = '{newMarshrut['en']['price']}'""")
+    answer_en = cursor.fetchall()
 
-    marshrut_air[keys] = {
-            "en": newMarshrut['en'],
-            "ru": newMarshrut['ru']
-        }
-    return marshrut_air[keys], 201
+    cursor.execute(f"""SELECT id
+                      FROM ticketairru
+                      WHERE start = '{newMarshrut['ru']['start']}' AND 
+                            "end" = '{newMarshrut['ru']['end']}' AND
+                            "startDate" = '{datetime.strptime(newMarshrut['ru']['start-date'], '%Y-%m-%d').date()}' AND
+                            "endDate" = '{datetime.strptime(newMarshrut['ru']['end-date'], '%Y-%m-%d').date()}' AND
+                            "price" = '{newMarshrut['ru']['price']}'""")
+    answer_ru = cursor.fetchall()
+
+    if len(answer_en) > 0 and len(answer_ru) > 0:
+        abort(400, "Маршрут уже создан")
+
+    if len(answer_ru) == 0 and len(answer_en) > 0:
+        try:
+            cursor.execute("SELECT MAX(id) FROM ticketairru")
+            id = cursor.fetchone()
+            id = 0 if id[0] == None else id[0] + 1
+
+            cursor.execute(f"""INSERT INTO ticketairru(id, start, "end", "startDate", "endDate", "startTime", "endTime", price)
+                                VALUES({id}, '{newMarshrut['ru']['start']}', '{newMarshrut['ru']['end']}',
+                                '{datetime.strptime(newMarshrut['ru']['start-date'], '%Y-%m-%d').date()}', '{datetime.strptime(newMarshrut['ru']['end-date'], '%Y-%m-%d').date()}',
+                                '{newMarshrut['ru']['start-time']}', '{newMarshrut['ru']['end-time']}',
+                                {newMarshrut['ru']['price'].split(",")[0]})""")
+
+            cn.commit()
+            return newMarshrut['ru'], 201
+        except Exception as e:
+            abort(400, f"Ошибка добавления данных! Ошибка: {e}")
+    
+    if len(answer_ru) > 0 and len(answer_en) == 0:
+        try:
+            cursor.execute("SELECT MAX(id) FROM ticketairen")
+            id = cursor.fetchone()
+            id = 0 if id[0] == None else id[0] + 1
+
+            cursor.execute(f"""INSERT INTO ticketairru(id, start, "end", "startDate", "endDate", "startTime", "endTime", price)
+                                VALUES({id}, '{newMarshrut['en']['start']}', '{newMarshrut['en']['end']}',
+                                '{datetime.strptime(newMarshrut['en']['start-date'], '%Y-%m-%d').date()}', '{datetime.strptime(newMarshrut['en']['end-date'], '%Y-%m-%d').date()}',
+                                '{newMarshrut['en']['start-time']}', '{newMarshrut['en']['end-time']}',
+                                {newMarshrut['en']['price'].split(",")[0]})""")
+            cn.commit()
+            return newMarshrut['en'], 201
+        except Exception as e:
+            abort(400, f"Ошибка добавления данных! Ошибка: {e}")
+    else:
+        try:
+            cursor.execute("SELECT MAX(id) FROM ticketairru")
+            id = cursor.fetchone()
+            id = 0 if id[0] == None else id[0] + 1
+            cursor.execute(f"""INSERT INTO ticketairru(id, start, "end", "startDate", "endDate", "startTime", "endTime", price)
+                                VALUES({id}, '{newMarshrut['ru']['start']}', '{newMarshrut['ru']['end']}',
+                                '{datetime.strptime(newMarshrut['ru']['start-date'], '%Y-%m-%d').date()}', '{datetime.strptime(newMarshrut['ru']['end-date'], '%Y-%m-%d').date()}',
+                                '{newMarshrut['ru']['start-time']}', '{newMarshrut['ru']['end-time']}',
+                                {newMarshrut['ru']['price'].split(",")[0]})""")
+
+            cursor.execute("SELECT MAX(id) FROM ticketairen")
+            id = cursor.fetchone()
+            id = 0 if id[0] == None else id[0] + 1
+            cursor.execute(f"""INSERT INTO ticketairen(id, start, "end", "startDate", "endDate", "startTime", "endTime", price)
+                                VALUES({id}, '{newMarshrut['en']['start']}', '{newMarshrut['en']['end']}',
+                                '{datetime.strptime(newMarshrut['en']['start-date'], '%Y-%m-%d').date()}', '{datetime.strptime(newMarshrut['en']['end-date'], '%Y-%m-%d').date()}',
+                                '{newMarshrut['en']['start-time']}', '{newMarshrut['en']['end-time']}',
+                                {newMarshrut['en']['price'].split(",")[0]})""")
+            cn.commit()
+            return newMarshrut, 201
+        except Exception as e:
+            abort(400, f"Ошибка добавления данных! Ошибка: {e}")
+
 
 
 def insert_marshrut_train(newMarshrut):

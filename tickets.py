@@ -1,16 +1,18 @@
-# Модуль API для билетов
-#
-# Разделы для билетов РЖД, самолет и автобус
-#
+# -*- coding: utf-8 -*-
+"""
+:authors: Dima Chepushtanov
+:license: Apache License, Version 2.0, see LICENSE file
 
-"""Модель билета
-idmarshrut : Номер маршрута
+:copyright: (c) 2024 Ymka
 """
 
 from flask import abort
 from datetime import datetime
+from database import connect
+
 
 """Данные по Авиабилетам"""
+
 
 ticket_air = {
     "1": {
@@ -60,7 +62,7 @@ ticket_air = {
 }
 
 
-def all_airTicket():
+def all_airTicket(lanaguage):
     """Функция на все авиа тикеты"""
     return list(ticket_air.values())
 
@@ -87,12 +89,16 @@ def filterTicket(ticket):
             404, f"Person with last name not found // Билет не найден"
         )
 
-ticket_rgd = {
-
-}
-
 
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
 
 
+if __name__ == "__main__":
+    cursor = connect.cursor()
+    cursor.execute("SELECT * FROM ticketairen")
+    
+    ticket_air = {}
+
+
+    
