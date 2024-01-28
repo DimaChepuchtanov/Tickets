@@ -1,0 +1,92 @@
+p{
+    margin:0
+}
+
+html{
+    height: 100%;
+}
+body{
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url('/static/img/file62917.jpeg');
+    height: 100%;
+}
+
+a{
+   text-decoration: none;
+   color: black;
+}
+
+a:hover{
+    color: black;
+    text-shadow:1px 0 1px #f2f2f2, 0 1px 1px #fdfdfd, -1px 0 1px #a85252, 0 -1px 1px #000;
+}
+
+.header{
+    background-color:white;
+    box-shadow: 0vw 2vw 2vw 0vw #a59c9c;
+    padding: 0;
+    display: flex;
+    position: sticky;
+    top:0
+}
+
+.icon{
+    flex-basis: 10%;
+}
+
+.icon #img{
+    width: 100%;
+}
+
+.nav{
+    display: flex;
+    flex-basis: 80%;
+}
+
+.nav div{
+    margin-left: 30px;
+    font-size: 1.56vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+
+.dropdown{
+    flex-basis: 5%;
+}
+
+
+.dropdown #img{
+    width: 100%;
+}
+
+.footer{
+    background-color: #a59c9c;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.footer .main-info{
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer .social, .footer .document, .footer .official-address{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    
+}
+
+.footer #author-code{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px outset black;
+    align-content: center;
+    flex-wrap: wrap;
+}

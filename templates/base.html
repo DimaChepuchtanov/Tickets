@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/static/img/iconSite.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
+    
+    <title>WayFinder</title>
+</head>
+<body style="display: flex;">
+    <div class="container header">
+        <div class="icon container">
+            <img id="img" src="/static/img/iconSite.png">
+        </div>
+        <div class="nav">
+            <div>
+                <a href="/web/main"><p>Главная</p></a>
+            </div>
+            <div>
+                <a href="/web/ticket"><p>Билеты</p></a>
+            </div>
+            <div>
+                <a href="/web/news"><p>Новости</p></a>
+            </div>
+            <div>
+                <a href="/web/help"><p>Помощь</p></a>
+            </div>
+        </div>
+        {% if user == "None" %}
+            <div class="dropdown" style="display: flex">
+                <img class="bt-list-profile" id="img" src="/static/img/NoNameProfile.png" onclick="myFunction()" >
+                <ul class="dropdown-menu" id="myDropdown">
+                    <li><a class="dropdown-item" href="#">Регистрация</a></li>
+                    <li><a class="dropdown-item" href="#">Авторизация</a></li>
+                </ul>
+            </div>
+        {% endif %}
+        {% if user == "man" %}
+            <div class="dropdown" style="display: flex">
+                <img class="bt-list-profile" id="img" src="/static/img/profileMan.png" onclick="myFunction()" >
+                <ul class="dropdown-menu" id="myDropdown">
+                    <li><a class="dropdown-item" href="/web/profile/{{userName}}">Профиль</a></li>
+                    <li><a class="dropdown-item" href="#">Бонус</a></li>
+                    <li><a class="dropdown-item" href="#">История</a></li>
+                </ul>
+            </div>
+        {% endif %}
+        {% if user == "woman" %}
+            <div class="dropdown" style="display: flex">
+                <img class="bt-list-profile" id="img" src="/static/img/NoNameProfile.png" onclick="myFunction()" >
+                <ul class="dropdown-menu" id="myDropdown">
+                    <li><a class="dropdown-item" href="#">Регистрация</a></li>
+                    <li><a class="dropdown-item" href="#">Авторизация</a></li>
+                </ul>
+            </div>
+        {% endif %}
+
+        <script>
+            function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.bt-list-profile')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-menu");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+        </script>
+    </div>
+    <div>
+        {% include includes %}
+    </div>
+    <div class="footer">
+        <div class="main-info">
+            <div class="social">
+                <div>
+                    <p>Мы в социальных сетях</p>
+                    <p>VK</p>
+                    <p>TG</p>
+                </div>
+            </div>
+            <div class="document">
+                <div>
+                    <p>Документы</p>
+                    <p>Разрешение на ведение бизнеса</p>
+                    <p>Директор</p>
+                    <p>Политика покупки билетов</p>
+                </div>
+            </div>
+            <div class="official-address">
+                <div>
+                    <p>Наш адресс: </p>
+                    <p>Г. Пермь</p>
+                </div>
+            </div>
+        </div>
+        <div id="author-code">
+            <p>©️DimaChepushtanov (nick: Ymka)</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.profile{
+    margin-top: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 10%;
+}
+
+.story-post .card{
+    margin-left: 4%
+}
+
+.card{
+    position: static; 
+}
+#profile-info{
+    flex-basis: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
