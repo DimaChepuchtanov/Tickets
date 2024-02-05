@@ -176,14 +176,6 @@ paths:
       responses:
         "200":
           description: "Успешно"
-    get:
-      operationId: "transport.all_marshutrs_train"
-      tags:
-        - "Билеты ЖД"
-      summary: "Просмотр всех билетов ЖД"
-      responses:
-        "200":
-          description: "Успешно"
     # delete:
     #   tags:
     #     - "Билеты ЖД"
@@ -200,6 +192,17 @@ paths:
     #         schema:
     #           x-body-name: "deleteMashrute"
     #           $ref: "#/components/schemas/delMarshrut"
+  /train/{language}:
+    get:
+        operationId: "transport.all_marshutrs_train"
+        tags:
+          - "Билеты ЖД"
+        parameters:
+          - $ref: "#/components/parameters/language"
+        summary: "Просмотр всех билетов ЖД"
+        responses:
+          "200":
+            description: "Успешно"
   /train/{idWay}:
     put:
       tags:
@@ -251,14 +254,6 @@ paths:
       responses:
         "200":
           description: "Успешно"
-    get:
-      operationId: "transport.all_marshurts_bus"
-      tags:
-        - "Автобусные билеты"
-      summary: "Просмотр всех билетов на автобусы"
-      responses:
-        "200":
-          description: "Успешно"
     # delete:
     #   tags:
     #     - "Билеты ЖД"
@@ -275,6 +270,17 @@ paths:
     #         schema:
     #           x-body-name: "deleteMashrute"
     #           $ref: "#/components/schemas/delMarshrut"
+  /bus/{language}:
+    get:
+        operationId: "transport.all_marshurts_bus"
+        tags:
+          - "Автобусные билеты"
+        summary: "Просмотр всех билетов на автобусы"
+        parameters:
+          - $ref: "#/components/parameters/language"
+        responses:
+          "200":
+            description: "Успешно"
   /bus/{idWay}:
     put:
       tags:
