@@ -8,3 +8,7 @@
 
 language = "ru"
 ApiUrl = "http://127.0.0.1:8000/api"
+headers={
+    'Content-type':'application/json', 
+    'Accept':'application/json'
+}
