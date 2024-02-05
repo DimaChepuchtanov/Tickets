@@ -380,7 +380,7 @@ def insert_marshrut_bus(newMarshrut):
             return newMarshrut['ru'], 201
         except Exception as e:
             abort(400, f"Ошибка добавления данных! Ошибка: {e}")
-    
+
     if len(answer_ru) > 0 and len(answer_en) == 0:
         try:
             cursor.execute("SELECT MAX(id) FROM ticketbusen")
