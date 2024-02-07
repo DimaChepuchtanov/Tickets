@@ -6,7 +6,7 @@
 :copyright: (c) 2024 Ymka
 """
 
-from config import language, ApiUrl as url, headers as head
+from .config import language, ApiUrl as url, headers as head
 import requests as req
 import json
 

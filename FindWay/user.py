@@ -6,13 +6,14 @@
 :copyright: (c) 2024 Ymka
 """
 
-from config import language, ApiUrl as url, headers as head
+from .config import language, headers as head
 import requests as req
 import json
 
+
 class User():
-    def __init__(self):
-        pass
+    def __init__(self, url):
+        self.url = url
 
     """Блок работы с профилем """
 
@@ -40,7 +41,7 @@ class User():
                     "detail": "Ошибка введенных данных. Обнаружены цифры"}
 
         try:
-            reuqest = req.get(f"http://127.0.0.1:8000/api/user/{FIO}")
+            reuqest = req.get(f"{self.url}/user/{FIO}")
         except:
             return {"status_code": "500",
                     "title": "Ошибка сервера",
@@ -59,7 +60,7 @@ class User():
             return {
                 "status_code": status,
                 "title": "Пользователь найден",
-                "detail": detail  
+                "detail": detail
             }
 
     def link_profile(self, FIO: str) -> str:
@@ -75,7 +76,7 @@ class User():
                     "detail": "Ошибка введенных данных. Обнаружены цифры"}
 
         try:
-            reuqest = req.get(f"http://127.0.0.1:8000/api/user/{FIO}")
+            reuqest = req.get(f"{self.url}/user/{FIO}")
         except Exception as e:
             return {"status_code": "500",
                     "title": "Ошибка сервера",
@@ -88,7 +89,7 @@ class User():
             return {
                 "status_code": status,
                 "title": "Пользователь не найден",
-                "detail": f"Пользователь {FIO} был не найден в базе"  
+                "detail": detail['detail']
             }
         else:
             return {
@@ -111,9 +112,9 @@ class User():
                     "detail": "Ошибка введенных данных. Обнаружены цифры"}
 
         try:
-            reuqest = req.post(f"http://127.0.0.1:8000/api/user",
-                                data=json.dumps({"FIO": FIO}),
-                                headers={'Content-Type': 'application/json'})
+            reuqest = req.post(f"{self.url}/user",
+                                    data=json.dumps({"FIO": FIO}),
+                                    headers={'Content-Type': 'application/json'})
         except:
             return {"status_code": "500",
                     "title": "Ошибка сервера",
@@ -126,7 +127,8 @@ class User():
             return {
                 "status_code": status,
                 "title": "Пользователь не создан",
-                "detail": f"Пользователь {FIO} не был создан"
+                "detail": f"Пользователь {FIO} не был создан",
+                "cause": detail
             }
         else:
             return {
@@ -138,7 +140,7 @@ class User():
     def find_profile(self) -> dict:
         """Возвращает весь список пользователей"""
         try:
-            reuqest = req.get(f"http://127.0.0.1:8000/api/user")
+            reuqest = req.get(f"{self.url}/user")
         except:
             return {"status_code": "500",
                     "title": "Ошибка сервера",
@@ -153,6 +155,7 @@ class User():
                 "detail": detail
             }
 
+
 if __name__ == "__main__":
     user = User()
-    print(user.create_profile("Иванов Иван Иванович"))
+    print(user.profile_info("Иванов Иван Иванович"))
