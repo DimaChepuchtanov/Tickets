@@ -7,6 +7,8 @@ from flask import abort
 from datetime import datetime
 from pprint import pprint
 from database import connect as cn
+from random import randint, choice
+from pprint import pprint
 
 cursor = cn.cursor()
 """Данные по Авиабилетам"""
@@ -61,6 +63,47 @@ marshrut_air = {
 marshrut_train = {}
 
 marshrut_bus = {}
+
+
+def selectWay(table, start, end, before, way=None):
+    before.append(start)
+
+    if end == start:
+        return before
+
+    cursor.execute(f"""SELECT "end" FROM ticketairen WHERE start = '{start}'""")
+    answer = cursor.fetchall()
+
+    listCity = set([x[0] for x in answer])
+    for i in before:
+        if i in listCity:
+            listCity.remove(i)
+
+
+    for i in listCity:
+        return selectWay(table, i, end, before)
+
+
+
+def createMarschrut(wayes):
+    """Функция создания маршрута"""
+
+    print(wayes)
+    Way = []
+
+    start = "Moscow"
+    end = "Izevsk"
+
+    if wayes['language'] == "en":
+            cursor.execute(f"""SELECT "end" FROM ticketairen WHERE start = '{wayes['start']}'""")
+            answer = cursor.fetchall()
+
+            listAnswer = set([x[0] for x in answer])
+            listAnswer.remove(end)
+
+            for way in listAnswer:
+                Way.append(selectWay("ticketairen", way, wayes['end'], [wayes['start']]))
+    return dateTime(Way,"airandbus")
 
 
 def all_marshurts_avia(language):
@@ -256,7 +299,6 @@ def insert_marshrut_avia(newMarshrut):
             return newMarshrut, 201
         except Exception as e:
             abort(400, f"Ошибка добавления данных! Ошибка: {e}")
-
 
 
 def insert_marshrut_train(newMarshrut):
@@ -554,3 +596,62 @@ def update_way_bus(idWay, idWa):
 
     marshrut_bus[idWay] = {"en": idWa['en'], "ru": idWa['ru']}
     return marshrut_bus[idWay]
+
+
+def dateTime(travel: list, transport, language="en"):
+    
+    way = []
+
+    fly = []
+    train = []
+    bus = []
+
+    date = "2024-02-22"
+    time = "02:00"
+
+    
+    if "air" in transport:
+        for way in travel:
+            for i in range(len(way)-1):
+                cursor.execute(f"""SELECT id,"endDate","endTime" FROM ticketair{language} WHERE start = '{way[i]}' AND
+                                                                                        "end" = '{way[i+1]}' AND
+                                                                                        "startDate" = '{date}' AND
+                                                                                        "startTime" > '{time}'""")
+                answer = cursor.fetchall()
+                for j in answer:
+                    fly.append([way[i], way[i+1], j[0]])
+                    date = j[1]
+    
+    date = "2024-02-22"
+    if "bus" in transport:
+        for way in travel:
+            for i in range(len(way)-1):
+                cursor.execute(f"""SELECT id,"endDate","endTime" FROM ticketbus{language} WHERE start = '{way[i]}' AND
+                                                                                        "end" = '{way[i+1]}' AND
+                                                                                        "startDate" = '{date}' AND
+                                                                                        "startTime" > '{time}'""")
+                answer = cursor.fetchall()
+                for j in answer:
+                    bus.append([way[i], way[i+1], j[0]])
+                    date = j[1]
+
+
+    if len(bus) == len(fly):
+        typecar = ['air', 'bus']
+        findWay = [[] for _ in range(len(travel))]
+
+        for j in range(len(findWay)):
+                for je in range(len(travel[j])-1):
+                    for o in range(len(bus)):
+                        if bus[o][0] == travel[j][je] and bus[o][1] == travel[j][je+1]:
+                            findWay[j].append({"id":bus[o][2], "start": bus[o][0], "end": bus[o][1], "type": choice(typecar)})
+                            bus.pop(o)
+                            fly.pop(o)
+                            break
+        return findWay
+        
+        
+
+
+if __name__ == "__main__":
+    createMarschrut("en", "air")

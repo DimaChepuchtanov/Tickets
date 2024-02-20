@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # people.py
 from flask import abort
 from datetime import datetime
@@ -86,9 +87,16 @@ def update(userInfo, newData):
 def read_one(userInfo):
     """Информация о конкретном пользователе"""
 
-    for key, value in user.items():
-        if value['FIO'] == userInfo:
-            return value
+    try:
+        cursor.execute(f"""SELECT * FROM clients WHERE "FIO" = '{userInfo}' """)
+        Info = cursor.fetchone()
+
+        language = Info[3][0].removeprefix("language")
+        if language == "en":
+            return {"ID": Info[0], "FIO": Info[1], "StoryBuy": Info[2], "filter": Info[3]}
+
+    except Exception as e:
+        abort(404, f"Ошибка запроса. {e}")
     else:
         abort(
             404, f"Person with last name {userInfo} not found"
@@ -99,23 +107,24 @@ def create(person):
     """Создание нового пользователя"""
 
     findUser = False
+    fio = person['FIO']
     try:
-        cursor.execute(f"SELECT id FROM clients WHERE 'FIO' = '{person['FIO']}'")
+        cursor.execute(f"""SELECT id FROM clients WHERE "FIO" = '{fio}'""")
         findUser = cursor.fetchone()
     except Exception as e:
         abort(404, f"Ошибка запроса на поиск пользователя. Ошибка {e}")
-    
+
     if findUser is not None:
         abort(404, f"Пользователь уже существует")
     else:
         try:
             cursor.execute(f"SELECT MAX(id) FROM clients")
             findUser = cursor.fetchone()
-            cursor.execute(f"INSERT INTO clients VALUES({findUser[0] + 1}, '{person['FIO']}', '[]', '{['languageru', 'counttransport2', 'typetransportbusandtrain']}'")
+            cursor.execute("INSERT INTO clients VALUES( %s, %s, %s, %s);", (int(findUser[0]) + 1, str(person['FIO']), ["None"], ['languageen', 'counttransport2', 'typetransportbusandtrain'],))
             cn.commit()
         except Exception as e:
             abort(404, f"Ошибка создания. {e}")
-    
+
     return person['FIO'], 201
 
 

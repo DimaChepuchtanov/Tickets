@@ -298,12 +298,44 @@ paths:
             schema:
               x-body-name: "idWa"
               $ref: "#/components/schemas/newMarshrut"
-
+  /way/{wayes}:
+    post:
+        operationId: "transport.createMarschrut"
+        tags:
+          - "Потбор маршрута"
+        summary: "Билеты по заданному критерию"
+        requestBody:
+            description: ""
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "wayes"
+                  $ref: "#/components/schemas/FindWay"
+        responses:
+          "200":
+            description: "Успешно"
 
 
 components:
   schemas:
     ticketFilter:
+      type: "object"
+      required:
+        - start
+        - end
+        - date
+        - language
+      properties:
+        start:
+          type: "string"
+        end:
+          type: "string"
+        date:
+          type: "string"
+        language:
+          type: "string"
+    FindWay:
       type: "object"
       required:
         - start

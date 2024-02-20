@@ -1,5 +1,5 @@
 
-from flask import render_template # Remove: import Flask
+from flask import render_template
 import connexion
 app = connexion.App(__name__, specification_dir="./")
 app.add_api("swagger.yml")
@@ -10,4 +10,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
