@@ -3,34 +3,65 @@
 :authors: Dima Chepushtanov
 :license: Apache License, Version 2.0, see LICENSE file
 
-:copyright: (c) 2024 Ymka 1q2w3e4r
+:copyright: (c) 2024 Ymka
 """
 
-from .ticket import Tickets
-from .user import User
-import typing
+from typing import Optional
+import requests as rq
+import secrets
 
 
-class Main(Tickets, User):
-    def __init__(self, url):
-        self.url = url
+"""
+Status Table:
+    Error = Любая ошибка
+    Active = Активный сеанс
+    ////
 
-def auth(url: str, token: str) -> str:
+"""
+
+
+class Main():
+    def __init__(self):
+        from .ticket import Tickets
+        from .user import User
+
+        self.user = User("http://127.0.0.1:8080/api")
+        self.ticket = Tickets()
+
+
+def auth(id: Optional[int] = None, token: Optional[str] = None) -> str:
     """Авторизация библиотеки FindWayLib
-    Авторизация происходит через получение авторизационного url
-    на который будет в последствие отправляться запрос. 
-    Доступ один на 24 часа. Совместо с url будет токен
+
+    Работа библиотеки происходит с авторизационными данными\n
+    ::params
+        * token -> ключ авторизации
+        * user -> ID пользователя
     """
 
-    auth_token = "1"
-    auth_url = "http://127.0.0.1:8000/api"
+    if id is None and token is None:
+        return {"status": "Error",
+                "detail": "Не указаны пользовательские данные и данные токена"}
 
-    if auth_token == token and auth_url == url:
-        return Main(url)
-    elif auth_token == token and auth_url != url:
-        return "Ошибка коннекта"
+    if id is None or token is None:
+        return {"status": "Error",
+                "detail": "Не указан один из необходимых данных"}
 
+    check = rq.get(f"http://127.0.0.1:8080/api/token/check/{id}").json()
+    if check['Status'] == "Not Found":
+        return {"status": "Error",
+                "detail": "Указанный пользователь не найден"}
+    elif check['Status'] == "Expired":
+        return {"status": "Error",
+                "detail": """Активный токен пользователя устарел.
+                             Обновите токен на сайте"""}  # УКАЗАТЬ ССЫЛКУ
 
+    else:
+        check = rq.get(f"http://127.0.0.1:8080/api/token/showToken/{id}").json()
+        if secrets.compare_digest(token, check['Status']):
+            return Main()
+        else:
+            return {"status": "Error",
+                    "detail": "Указаный токен не найден"}
 
 
 __author__ = 'Dima Chepushtanov'

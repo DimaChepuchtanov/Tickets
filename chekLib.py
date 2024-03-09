@@ -1,4 +1,3 @@
 import FindWay
 
-
-s = FindWay.auth("http://127.0.0.1:8000/api", "1")
+findway = FindWay.auth(id=10, token='vQo2mk855e9CsRQRdDTtAw')

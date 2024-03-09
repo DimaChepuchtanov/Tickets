@@ -73,27 +73,3 @@ class Tickets():
                 5) Разный вид транспорта
                 6) Возможность ездить с животными
         """
-
-
-if __name__ == "__main__":
-    tt = Tickets()
-    print(tt.createNewTicket("train", params={
-  "en": {
-    "end": "string",
-    "end-date": "2023-09-20",
-    "end-time": "15:30",
-    "price": "120",
-    "start": "string",
-    "start-date": "2023-09-20",
-    "start-time": "15:30"
-  },
-  "ru": {
-    "end": "string",
-    "end-date": "2023-09-20",
-    "end-time": "15:30",
-    "price": "120",
-    "start": "string",
-    "start-date": "2023-09-20",
-    "start-time": "15:30"
-  }
-}))

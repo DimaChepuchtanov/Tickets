@@ -11,8 +11,8 @@
 """
 
 language = "ru"
-ApiUrl = "http://127.0.0.1:8000/api"
+ApiUrl = "http://127.0.0.1:8080/api"
 headers={
-    'Content-type':'application/json', 
-    'Accept':'application/json'
+    'Content-type': 'application/json', 
+    'Accept': 'application/json'
 }

@@ -42,7 +42,7 @@ class User():
 
         try:
             reuqest = req.get(f"{self.url}/user/{FIO}")
-        except:
+        except Exception as e:
             return {"status_code": "500",
                     "title": "Ошибка сервера",
                     "detail": "Сервер отверг запрос. Нет подключения"}
