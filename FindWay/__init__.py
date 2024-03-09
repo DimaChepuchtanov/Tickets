@@ -26,7 +26,7 @@ class Main():
         from .user import User
 
         self.user = User("http://127.0.0.1:8080/api")
-        self.ticket = Tickets()
+        self.ticket = Tickets("http://127.0.0.1:8080/api")
 
 
 def auth(id: Optional[int] = None, token: Optional[str] = None) -> str:
