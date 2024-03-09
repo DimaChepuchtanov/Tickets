@@ -103,39 +103,6 @@ class User():
 
         pass
 
-    def create_profile(self, FIO: str) -> bool:
-        """Создание профиля пользователя"""
-
-        if self.__chekAplpa(FIO):
-            return {"status_code": "400",
-                    "title": "Ошибка данных",
-                    "detail": "Ошибка введенных данных. Обнаружены цифры"}
-
-        try:
-            reuqest = req.post(f"{self.url}/user",
-                                    data=json.dumps({"FIO": FIO}),
-                                    headers={'Content-Type': 'application/json'})
-        except:
-            return {"status_code": "500",
-                    "title": "Ошибка сервера",
-                    "detail": "Сервер отверг запрос. Нет подключения"}
-
-        status = reuqest.status_code
-        detail = reuqest.json()
-
-        if status == 404:
-            return {
-                "status_code": status,
-                "title": "Пользователь не создан",
-                "detail": f"Пользователь {FIO} не был создан",
-                "cause": detail
-            }
-        else:
-            return {
-                "status_code": status,
-                "title": "Пользователь создан",
-                "detail": detail
-            }
 
     def find_profile(self) -> dict:
         """Возвращает весь список пользователей"""
