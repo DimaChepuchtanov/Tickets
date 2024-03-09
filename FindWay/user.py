@@ -35,92 +35,171 @@ class User():
                 !Данные должны быть в строгом порядке, иначе данные будут в неверном формате отображены
         """
 
-        if self.__chekAplpa(FIO):
-            return {"status_code": "400",
-                    "title": "Ошибка данных",
-                    "detail": "Ошибка введенных данных. Обнаружены цифры"}
-
         try:
-            reuqest = req.get(f"{self.url}/user/{FIO}")
+            reuqest = req.get(f"{self.url}/user/{FIO}").json()
         except Exception as e:
-            return {"status_code": "500",
-                    "title": "Ошибка сервера",
+            return {"status": "Error",
                     "detail": "Сервер отверг запрос. Нет подключения"}
 
-        status = reuqest.status_code
-        detail = reuqest.json()
-
-        if status == 404:
-            return {
-                "status_code": status,
-                "title": "Пользователь не найден",
-                "detail": f"Пользователь {FIO} был не найден в базе"  
-            }
+        if reuqest['status'] == "User Not Found":
+            return {"status": "Error",
+                    "detail": "Пользователь не найден"}
         else:
-            return {
-                "status_code": status,
-                "title": "Пользователь найден",
-                "detail": detail
-            }
+            return {"status": "Successful",
+                    "detail": reuqest['status']}
 
     def link_profile(self, FIO: str) -> str:
-        """Возвращает ссылку на профиль сайта пользователя""" 
+        """Возвращает ссылку на профиль сайта пользователя"""
+
+        try:
+            reuqest = req.get(f"{self.url}/user/{FIO}").json()
+        except Exception as e:
+            return {"status": "Error",
+                    "detail": "Сервер отверг запрос. Нет подключения"}
+
+        if reuqest['status'] == "User Not Found":
+            return {"status": "Error",
+                    "detail": "Пользователь не найден"}
+        else:
+            return {"status": "Successful",
+                    "detail": reuqest['status']['link']}
         pass
 
     def history_buy(self, FIO: str) -> dict:
-        """Возвращает список купленных билетов пользователя"""
+        """Просмотр купленных билетов
+        
+        Входные параметры:
+            * FIO - имя пользователя
+        Выходные параметры: 
+            * список строк, где каждая строка = последовательность билетов
 
-        if self.__chekAplpa(FIO):
-            return {"status_code": "400",
-                    "title": "Ошибка данных",
-                    "detail": "Ошибка введенных данных. Обнаружены цифры"}
+        Пример выходной строки:
+        ["bus12 air22 train12"]
+        """
 
         try:
-            reuqest = req.get(f"{self.url}/user/{FIO}")
+            reuqest = req.get(f"{self.url}/user/{FIO}").json()
         except Exception as e:
-            return {"status_code": "500",
-                    "title": "Ошибка сервера",
+            return {"status": "Error",
                     "detail": "Сервер отверг запрос. Нет подключения"}
 
-        status = reuqest.status_code
-        detail = reuqest.json()
-
-        if status == 404:
-            return {
-                "status_code": status,
-                "title": "Пользователь не найден",
-                "detail": detail['detail']
-            }
+        if reuqest['status'] == "User Not Found":
+            return {"status": "Error",
+                    "detail": "Пользователь не найден"}
         else:
-            return {
-                "status_code": status,
-                "title": "Пользователь найден",
-                "detail": detail['storyBuy']
-            }
+            return {"status": reuqest['status']['StoryBuy']}
 
     def edit_profile(self, FIO: str, edit: dict) -> bool:
-        """Изменяет данные профиля"""
+        """Изменяет данные профиля
 
-        pass
+        Пользовательское изменение профиля включает в себя:
+            * Изменение пола пользователя
+            * Изменение возраста пользователя
+            * Изменение почты пользователя
 
+        Входные данные:
+            * FIO - имя пользователя
+            * eidt - словарь с измененными данными
+        """
 
-    def find_profile(self) -> dict:
-        """Возвращает весь список пользователей"""
+        edit['history'] = ""
+        edit['post'] = ""
         try:
-            reuqest = req.get(f"{self.url}/user")
+            reuqest = req.put(f"{self.url}/user/{FIO}", json=edit).json()
         except:
-            return {"status_code": "500",
-                    "title": "Ошибка сервера",
+            return {"status": "Error",
+                    "detail": "Сервер отверг запрос. Нет подключения"}
+        
+        if reuqest['status'] == "Данные не обновлены":
+            return {"status": "Error",
+                    "detail": "Ошибка сервера, данные не были обновены"}
+        elif reuqest['status'] == "User Not Found":
+            return {"status": "Error",
+                    "detail": "Пользователь не был найден"}
+        else:
+            return {"status": "Saccessful",
+                    "detail": "Пользовательские данные были обновлены"}
+
+    def history_post(self, FIO: str) -> dict:
+        """Просмотр истории постов от пользователя
+
+        Входные параметры:
+            * FIO - имя пользователя
+        Выходные параметры: 
+            * список пользовательских постов
+        """
+
+        try:
+            reuqest = req.get(f"{self.url}/user/{FIO}").json()
+        except Exception as e:
+            return {"status": "Error",
                     "detail": "Сервер отверг запрос. Нет подключения"}
 
-        status = reuqest.status_code
-        detail = reuqest.json()
+        if reuqest['status'] == "User Not Found":
+            return {"status": "Error",
+                    "detail": "Пользователь не найден"}
+        else:
+            return {"status": reuqest['status']['post']}
 
-        return {
-                "status_code": status,
-                "title": "Список пользователей",
-                "detail": detail
-            }
+    def create_post(self, FIO: str, post: dict) -> dict:
+        """Создание поста
+
+        Входные параметры:
+            * FIO - имя пользователя
+            * post - словарь параметров
+        """
+
+        try:
+            post = req.post(f"{self.url}/post/create/{FIO}", data=post).json()
+        except:
+            return {"status": "Error",
+                    "detail": "Сервер отверг запрос. Нет подключения"}
+
+        if post['status'] == "Ошибка обновления, проверьте корректность данных и повторите попытку":
+            return {"status": "Error",
+                    "detail": "Ошибка сервера, повторите попытку"}
+        else:
+            return {"status": "Пост создан. Данные обновлены"}
+
+    def edit_post(self, id: int, post: dict) -> dict:
+        """Создание поста
+
+        Входные параметры:
+            * FIO - имя пользователя
+            * post - словарь параметров
+        """
+
+        try:
+            post = req.post(f"{self.url}/post/edit/{id}", data=post).json()
+        except:
+            return {"status": "Error",
+                    "detail": "Сервер отверг запрос. Нет подключения"}
+
+        if post['status'] == "Ошибка обновления, проверьте корректность данных и повторите попытку":
+            return {"status": "Error",
+                    "detail": "Ошибка сервера, повторите попытку"}
+        else:
+            return {"status": "Данные обновлены"}
+    
+    def delete_post(self, id: int) -> dict:
+        """Удаление поста
+
+        Входные параметры:
+            * FIO - имя пользователя
+            * post - словарь параметров
+        """
+
+        try:
+            post = req.get(f"{self.url}/post/delete/{id}").json()
+        except:
+            return {"status": "Error",
+                    "detail": "Сервер отверг запрос. Нет подключения"}
+
+        if post['status'] == "Ошибка обновления, проверьте корректность данных и повторите попытку":
+            return {"status": "Error",
+                    "detail": "Ошибка сервера, повторите попытку"}
+        else:
+            return {"status": "Пост удален"}
 
 
 if __name__ == "__main__":
