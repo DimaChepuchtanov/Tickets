@@ -1,22 +1,41 @@
 .profile{
-    margin-top: 10%;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-bottom: 10%;
+    margin:4% auto
 }
-
+.story-post{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
 .story-post .card{
-    margin-left: 4%
+    margin-top: 2%;
+    margin-left: 2%;
 }
 
 .card{
     position: static; 
 }
+
+#addPost{
+    cursor: pointer;
+    background: #fd0000;
+    height: 18px;
+    border-radius: 30px;
+    display: flex;
+    width: 18px;
+    border: 1px outset black;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+.postTitle{
+    display: flex;
+}
 #profile-info{
-    flex-basis: 50%;
+    margin-top: 35px;
+    flex-basis: 35%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
+    justify-content: flex-start;
 }

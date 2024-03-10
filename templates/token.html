@@ -14,21 +14,30 @@
             </div>
         </div>
         <div style="display: flex; justify-content: center; flex-direction: column; align-content: center; flex-wrap: wrap;">
-            <p class="h3 postTitle" style="text-align: center; margin-top: 3%; font-family: 'Trebuchet MS'; display: flex; justify-content: center;">Авторские посты <span id="addPost" onclick="createPost()">+</span></p>
-            <div class="story-post" style="display: flex">
-                {% for key in postList %}
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{key.images.0}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title">{{key.title}}</h5>
-                        <p class="card-text"><span class="d-inline-block text-truncate" style="max-width: 600px;">
-                            {{key.discribe}}
-                          </span></p>
-                        <a href="/web/main/post/{{key.id}}" class="btn btn-primary">Читать статью...</a>
-                        </div>
-                    </div>
-                {% endfor %}
+            <p class="h3 postTitle" style="text-align: center; margin-top: 3%; font-family: 'Trebuchet MS'; display: flex; justify-content: center;">Токен</p>
+            {% if token[0] == None %}
+            <div class="row g-3">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Имя" aria-label="Имя" readonly value="Токен отсутсвует">
+                  <p onclick="Create({{idUser}})" style="cursor: pointer;"> Создать токен </p>
+                </div>
             </div>
+            {% endif %}
+            {% if token[0] != None and token[1] == "update" %}
+            <div class="row g-3">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Имя" aria-label="Имя" readonly value="{{token.0}}">
+                  <p onclick="update({{idUser}})" style="cursor: pointer;"> Обновить токен </p>
+                </div>
+            </div>
+            {% endif %}
+            {% if token[0] != None and token[1] == "None" %}
+            <div class="row g-3">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Имя" aria-label="Имя" readonly value="{{token.0}}">
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
