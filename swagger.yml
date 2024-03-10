@@ -1,0 +1,509 @@
+# swagger.yml
+# Развернутый CRUD
+
+openapi: 3.0.0
+info:
+  title: "API by Dmitry Chepushtanov"
+  description: "API for working with tickets"
+  version: "4.0.0"
+servers:
+  - url: "/api"
+
+paths:
+  # Пользователь
+  /user:
+    get:
+      operationId: "user.read_all"
+      tags:
+        - "Пользователь"
+      summary: "Read the list of users // Получить общий список всех пользователй"
+      responses:
+        "200":
+          description: "Successfully // Успешно"
+    post:
+      operationId: "user.create"
+      tags:
+        - "Пользователь"
+      summary: "Создать нового пользователя"
+      requestBody:
+          description: ""
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "person"
+                $ref: "#/components/schemas/newUser"
+      responses:
+        "200":
+          description: "Успешно"
+  /user/{userInfo}:
+    get:
+      operationId: "user.read_one"
+      tags:
+        - "Пользователь"
+      summary: "Информация об одном пользователе"
+      parameters:
+        - $ref: "#/components/parameters/userInfo"
+      responses:
+        "200":
+          description: "Успех"
+    put:
+      tags:
+        - "Пользователь"
+      operationId: "user.update"
+      summary: "Обновление данных пользователя"
+      parameters:
+        - $ref: "#/components/parameters/userInfo"
+      responses:
+        "200":
+          description: "Успешно"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "newData"
+              # $ref: "#/components/schemas/user"
+
+  # Транспорт
+  /avia:
+    put:
+      operationId: "transport.insert_marshrut_avia"
+      tags:
+        - "Авиабилеты"
+      summary: "Создание нового маршрута"
+      requestBody:
+          description: ""
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "newMarshrut"
+                $ref: "#/components/schemas/newMarshrut"
+      responses:
+        "200":
+          description: "Успешно"
+    post:
+      operationId: "transport.filterTicket_avia"
+      tags:
+        - "Авиабилеты"
+      summary: "Билеты по заданному критерию"
+      requestBody:
+          description: ""
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "ticket"
+                $ref: "#/components/schemas/ticketFilter"
+      responses:
+        "200":
+          description: "Успешно"
+  /avia/{language}:
+    get:
+        operationId: "transport.all_marshurts_avia"
+        tags:
+          - "Авиабилеты"
+        parameters:
+          - $ref: "#/components/parameters/language"
+        summary: "Просмотр всех авиабилетов"
+        responses:
+          "200":
+            description: "Успешно"
+  /avia/{idWay}:
+    put:
+      tags:
+        - "Авиабилеты"
+      operationId: "transport.update_way_avia"
+      summary: "Обновление данных маршрута"
+      parameters:
+        - $ref: "#/components/parameters/idWay"
+      responses:
+        "200":
+          description: "Успешно"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "idWa"
+              $ref: "#/components/schemas/newMarshrut"
+    # delete:
+    #   tags:
+    #     - "Авиабилеты"
+    #   operationId: "transport.delete_marshrut"
+    #   summary: "Удаление маршрута"
+    #   responses:
+    #     "200":
+    #       description: "Успешно"
+    #   requestBody:
+    #     description: ""
+    #     required: True
+    #     content:
+    #       application/json:
+    #         schema:
+    #           x-body-name: "deleteMashrute"
+    #           $ref: "#/components/schemas/delMarshrut"
+
+  /train:
+    put:
+      operationId: "transport.insert_marshrut_train"
+      tags:
+        - "Билеты ЖД"
+      summary: "Создание нового маршрута"
+      requestBody:
+          description: ""
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "newMarshrut"
+                $ref: "#/components/schemas/newMarshrut"
+      responses:
+        "200":
+          description: "Успешно"
+    post:
+      operationId: "transport.filterTicket_train"
+      tags:
+        - "Билеты ЖД"
+      summary: "Билеты по заданному критерию"
+      requestBody:
+          description: ""
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "ticket"
+                $ref: "#/components/schemas/ticketFilter"
+      responses:
+        "200":
+          description: "Успешно"
+    # delete:
+    #   tags:
+    #     - "Билеты ЖД"
+    #   operationId: "transport.delete_marshrut"
+    #   summary: "Удаление маршрута"
+    #   responses:
+    #     "200":
+    #       description: "Успешно"
+    #   requestBody:
+    #     description: ""
+    #     required: True
+    #     content:
+    #       application/json:
+    #         schema:
+    #           x-body-name: "deleteMashrute"
+    #           $ref: "#/components/schemas/delMarshrut"
+  /train/{language}:
+    get:
+        operationId: "transport.all_marshutrs_train"
+        tags:
+          - "Билеты ЖД"
+        parameters:
+          - $ref: "#/components/parameters/language"
+        summary: "Просмотр всех билетов ЖД"
+        responses:
+          "200":
+            description: "Успешно"
+  /train/{idWay}:
+    put:
+      tags:
+        - "Билеты ЖД"
+      operationId: "transport.update_way_train"
+      summary: "Обновление данных маршрута"
+      parameters:
+        - $ref: "#/components/parameters/idWay"
+      responses:
+        "200":
+          description: "Успешно"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "idWa"
+              $ref: "#/components/schemas/newMarshrut"
+  
+  /bus:
+    put:
+      operationId: "transport.insert_marshrut_bus"
+      tags:
+        - "Автобусные билеты"
+      summary: "Создание нового маршрута"
+      requestBody:
+          description: ""
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "newMarshrut"
+                $ref: "#/components/schemas/newMarshrut"
+      responses:
+        "200":
+          description: "Успешно"
+    post:
+      operationId: "transport.filterTicket_bus"
+      tags:
+        - "Автобусные билеты"
+      summary: "Билеты по заданному критерию"
+      requestBody:
+          description: ""
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "ticket"
+                $ref: "#/components/schemas/ticketFilter"
+      responses:
+        "200":
+          description: "Успешно"
+    # delete:
+    #   tags:
+    #     - "Билеты ЖД"
+    #   operationId: "transport.delete_marshrut"
+    #   summary: "Удаление маршрута"
+    #   responses:
+    #     "200":
+    #       description: "Успешно"
+    #   requestBody:
+    #     description: ""
+    #     required: True
+    #     content:
+    #       application/json:
+    #         schema:
+    #           x-body-name: "deleteMashrute"
+    #           $ref: "#/components/schemas/delMarshrut"
+  /bus/{language}:
+    get:
+        operationId: "transport.all_marshurts_bus"
+        tags:
+          - "Автобусные билеты"
+        summary: "Просмотр всех билетов на автобусы"
+        parameters:
+          - $ref: "#/components/parameters/language"
+        responses:
+          "200":
+            description: "Успешно"
+  /bus/{idWay}:
+    put:
+      tags:
+        - "Автобусные билеты"
+      operationId: "transport.update_way_bus"
+      summary: "Обновление данных маршрута"
+      parameters:
+        - $ref: "#/components/parameters/idWay"
+      responses:
+        "200":
+          description: "Успешно"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "idWa"
+              $ref: "#/components/schemas/newMarshrut"
+  /way/{wayes}:
+    post:
+        operationId: "transport.createMarschrut"
+        tags:
+          - "Потбор маршрута"
+        summary: "Билеты по заданному критерию"
+        requestBody:
+            description: ""
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "wayes"
+                  $ref: "#/components/schemas/FindWay"
+        responses:
+          "200":
+            description: "Успешно"
+
+
+components:
+  schemas:
+    ticketFilter:
+      type: "object"
+      required:
+        - start
+        - end
+        - date
+        - language
+      properties:
+        start:
+          type: "string"
+        end:
+          type: "string"
+        date:
+          type: "string"
+        language:
+          type: "string"
+    FindWay:
+      type: "object"
+      required:
+        - start
+        - end
+        - date
+        - language
+      properties:
+        start:
+          type: "string"
+        end:
+          type: "string"
+        date:
+          type: "string"
+        language:
+          type: "string"
+    newUser:
+      type: "object"
+      required:
+        - FIO
+      properties:
+        FIO:
+          type: "string"
+    newMarshrut:
+      type: "object"
+      required:
+        - en
+        - ru
+      properties:
+        en:
+          type: "object"
+          $ref: "#/components/schemas/en"
+        ru:
+          type: "object"
+          $ref: "#/components/schemas/ru"
+    en:
+      type: "object"
+      required:
+        - start
+        - end
+        - start-date
+        - start-time
+        - end-date
+        - end-time
+        - price
+      properties:
+        start:
+          type: "string"
+        end:
+          type: "string"
+        start-date:
+          type: "string"
+        start-time:
+          type: "string"
+        end-date:
+          type: "string"
+        end-time:
+          type: "string"
+        price:
+          type: "string"
+    ru:
+      type: "object"
+      required:
+        - start
+        - end
+        - start-date
+        - start-time
+        - end-date
+        - end-time
+        - price
+      properties:
+        start:
+          type: "string"
+        end:
+          type: "string"
+        start-date:
+          type: "string"
+        start-time:
+          type: "string"
+        end-date:
+          type: "string"
+        end-time:
+          type: "string"
+        price:
+          type: "string"
+    delMarshrut:
+      type: "object"
+      required:
+        - id
+        - types
+      properties:
+        id:
+          type: "integer"
+        types:
+          type: "string"
+        
+  parameters:
+    transportType:
+      name: "transportType"
+      description: "Вид транспорта"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    userInfo:
+      name: "userInfo"
+      description: "Last name of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    id_ticket:
+      name: "id_ticket"
+      description: "Last name of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "integer"
+    marshrut:
+      name: "marshrut"
+      description: "Last name of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    start:
+      name: "Start point of travel // Начало маршрута"
+      description: "-"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    end:
+      name: "Start point of travel // Начало маршрута"
+      description: "-"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    date:
+      name: "Start point of travel // Начало маршрута"
+      description: "-"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    ticketId:
+      name: "Start point of travel // Начало маршрута"
+      description: "-"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    idWay:
+      name: "idWay"
+      description: "-"
+      in: path
+      required: True
+      schema:
+        type: "integer"
+    language:
+      name: "language"
+      description: "-"
+      in: path
+      required: True
+      schema:
+        type: "string"
+
+
+
+        
+        
