@@ -1,0 +1,190 @@
+.filter{
+    font-family:'Gill Sans';
+    margin-top: 140px;
+    border: 1px outset black;
+    box-shadow: 0 0 10px 0 black;
+    padding: 12px;
+    height: 300px;
+}
+
+.ticket{
+    background-color: white;
+    width: 700px;
+    border-radius: 25px;
+    font-size: 10pt
+}
+::-webkit-scrollbar-track {
+    background-color:#ecedee
+    }
+    ::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 0px;
+          border-radius: 0px;
+          background-color:#6dc0c8;
+          }
+          ::-webkit-scrollbar{
+            width: 4px;
+            }
+.list{
+    padding: 3px;
+    margin-left: 22px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 789px;}
+
+.buyTicket{
+    width: 100%;
+    text-align: right;
+    margin-left: -55px;
+    margin-bottom: 30px;
+}
+
+.ShowPicture #picture{
+    background-color: green;
+    position: absolute;
+    width: 100px;
+    height: 146px;
+    z-index: 10;
+}
+
+.ShowPicture #picture:hover {
+    display: none;
+}
+
+.bodyTicket{
+    display: flex;
+    flex-direction: row;
+}
+
+.ShowPicture{
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 145px;
+    width: 100px;
+    font-size: 10pt;
+    border-radius: 5px;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    position: relative;
+}
+
+#smena_kanpo_taymeru {
+    position:relative;
+    height:144px;
+    width:99px;
+    margin:0 auto;
+    }
+    
+    #smena_kanpo_taymeru img {
+    position:absolute;
+    left:0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    }
+    
+    #smena_kanpo_taymeru {
+    position:relative;
+    height:144px;
+    width:99px;
+    margin:0 auto;
+    }
+    
+    #smena_kanpo_taymeru img {
+    position:absolute;
+    left:0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    }
+    
+    @-webkit-keyframes cf3FadeInOut {
+    0% {
+    opacity:1;
+    }
+    45% {
+    opacity:1;
+    }
+    55% {
+    opacity:0;
+    }
+    100% {
+    opacity:0;
+    }
+    }
+    
+    @-moz-keyframes cf3FadeInOut {
+    0% {
+    opacity:1;
+    }
+    45% {
+    opacity:1;
+    }
+    55% {
+    opacity:0;
+    }
+    100% {
+    opacity:0;
+    }
+    }
+    
+    @-o-keyframes cf3FadeInOut {
+    0% {
+    opacity:1;
+    }
+    45% {
+    opacity:1;
+    }
+    55% {
+    opacity:0;
+    }
+    100% {
+    opacity:0;
+    }
+    }
+    
+    @keyframes cf3FadeInOut {
+    0% {
+    opacity:1;
+    }
+    45% {
+    opacity:1;
+    }
+    55% {
+    opacity:0;
+    }
+    100% {
+    opacity:0;
+    }
+    }
+    
+    #smena_kanpo_taymeru img.vesan {
+      -webkit-animation-name: cf3FadeInOut;
+      -webkit-animation-timing-function: ease-in-out;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-duration: 5s;
+      -webkit-animation-direction: alternate;
+    
+      -moz-animation-name: cf3FadeInOut;
+      -moz-animation-timing-function: ease-in-out;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-duration: 5s;
+      -moz-animation-direction: alternate;
+    
+      -o-animation-name: cf3FadeInOut;
+      -o-animation-timing-function: ease-in-out;
+      -o-animation-iteration-count: infinite;
+      -o-animation-duration: 5s;
+      -o-animation-direction: alternate;
+    
+      animation-name: cf3FadeInOut;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-duration: 5s;
+      animation-direction: alternate;
+    }

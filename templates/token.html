@@ -1,17 +1,7 @@
 <div class="container">
     <div class="profile">
-        <div style="display: flex;">
-            {% if user == 'man' %}
-            <div style="flex-basis: 20%">
-                <img src="/static/img/profileMan.png" style="width: 100%;">
-            </div>
-            
-            {% endif %}
-            <div id="profile-info" style="">
-                {% for key in profile %}
-                    <p>{{key}}</p>
-                {% endfor %}
-            </div>
+        <div style="font-family: 'Times New Roman';">
+          Токен представляет собой уникальный ключ, который необходим для работы с пакетом расширения. Токен обновляется каждые 24 часа, что обеспечивает безопасность и защиту данных пользователя. Для получения доступа к функциям и возможностям пакета расширения необходимо использовать текущий действующий токен. При истечении срока действия токена необходимо запросить новый ключ для продолжения работы с системой. Пожалуйста, храните токен в надежном месте и следите за его актуальностью для эффективного использования функционала пакета расширения.
         </div>
         <div style="display: flex; justify-content: center; flex-direction: column; align-content: center; flex-wrap: wrap;">
             <p class="h3 postTitle" style="text-align: center; margin-top: 3%; font-family: 'Trebuchet MS'; display: flex; justify-content: center;">Токен</p>

@@ -1,0 +1,875 @@
+<div class="container" style="display: flex;">
+    <div class="filter">
+        <p style="text-align: center; font-weight: bolder; font-size: 15pt;">Данные</p>
+        <label for="start" class="form-label">Начало</label>
+        <input class="form-control" list="datalistOptions" id="start" placeholder="Начните вводить текст">
+        <datalist id="datalistOptions">
+            <option value="Москва">
+            <option value="Пермь">
+            <option value="Екатеринбург">
+            <option value="Ижевск">
+            <option value="Нижний Тагил">
+            <option value="Владивосток">
+            <option value="Тюмень">
+            <option value="Красноярск">
+        </datalist>
+        <label for="end" class="form-label">Конец</label>
+        <input class="form-control" list="datalistOptions" id="end" placeholder="Начните вводить текст">
+        <datalist id="datalistOptions">
+            <option value="Москва">
+            <option value="Пермь">
+            <option value="Екатеринбург">
+            <option value="Ижевск">
+            <option value="Нижний Тагил">
+            <option value="Владивосток">
+            <option value="Тюмень">
+            <option value="Красноярск">
+        </datalist>
+        <label for="dateStart" style="margin-top: 10px;">Дата</label>
+        <input type='date' id="dateStart">
+        <p style="margin-top: 10px; cursor: pointer;">
+            <span onclick="Switch(this)" style="padding: 3px;">🚘</span>
+            <span onclick="Switch(this)" style="padding: 3px;">✈️</span>
+            <span onclick="Switch(this)" style="padding: 3px;">🚂</span>
+        </p>
+        <button style="width: 100%; margin-top: 10px;" onclick="FindTiket()">Поиск</button>
+    </div>
+    <div class="list">
+        <div class="ticket">
+            <div class="titleTicket">
+                <div style="text-align: center;">
+                    Москва ->🚘✈️🚂-> Пермь
+                </div>
+                <div style="height: 2px; width: 90%; margin-left:5%; background-color: gray; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="bodyTicket">
+                <div style="display: flex; flex-direction: row;">
+                    <div>
+                        <div class="ShowPicture">
+                            <div id="picture">
+                                Наведи на меня
+                            </div>
+                            <div id="smena_kanpo_taymeru">
+                                <img class="knopasa" src="https://zornet.ru/_fr/83/9570064.gif" style="height: 100%; width: 100%;" />
+                                <img class="vesan" src="https://zornet.ru/_fr/83/6999157.jpg" style="height: 100%; width: 100%;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; padding: 15px">
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <colgroup>
+                                    <col span="0" style="width: 68px;">
+                                    <col span="0" style="width: 92px;">
+                                    <col span="1" style="width: 15%;">
+                                 </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <tbody>
+                                    <colgroup>
+                                        <col span="0" style="width: 68px;">
+                                        <col span="0" style="width: 92px;">
+                                        <col span="1" style="width: 15%;">
+                                     </colgroup>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buyTicket">
+                <button>Купить</button>
+            </div>
+        </div>
+        <div class="ticket">
+            <div class="titleTicket">
+                <div style="text-align: center;">
+                    Москва ->🚘✈️🚂-> Пермь
+                </div>
+                <div style="height: 2px; width: 90%; margin-left:5%; background-color: gray; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="bodyTicket">
+                <div style="display: flex; flex-direction: row;">
+                    <div>
+                        <div class="ShowPicture">
+                            <div id="picture">
+                                Наведи на меня
+                            </div>
+                            <div id="smena_kanpo_taymeru">
+                                <img class="knopasa" src="https://zornet.ru/_fr/83/9570064.gif" style="height: 100%; width: 100%;" />
+                                <img class="vesan" src="https://zornet.ru/_fr/83/6999157.jpg" style="height: 100%; width: 100%;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; padding: 15px">
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <colgroup>
+                                    <col span="0" style="width: 68px;">
+                                    <col span="0" style="width: 92px;">
+                                    <col span="1" style="width: 15%;">
+                                 </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <tbody>
+                                    <colgroup>
+                                        <col span="0" style="width: 68px;">
+                                        <col span="0" style="width: 92px;">
+                                        <col span="1" style="width: 15%;">
+                                     </colgroup>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buyTicket">
+                <button>Купить</button>
+            </div>
+        </div>
+        <div class="ticket">
+            <div class="titleTicket">
+                <div style="text-align: center;">
+                    Москва ->🚘✈️🚂-> Пермь
+                </div>
+                <div style="height: 2px; width: 90%; margin-left:5%; background-color: gray; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="bodyTicket">
+                <div style="display: flex; flex-direction: row;">
+                    <div>
+                        <div class="ShowPicture">
+                            <div id="picture">
+                                Наведи на меня
+                            </div>
+                            <div id="smena_kanpo_taymeru">
+                                <img class="knopasa" src="https://zornet.ru/_fr/83/9570064.gif" style="height: 100%; width: 100%;" />
+                                <img class="vesan" src="https://zornet.ru/_fr/83/6999157.jpg" style="height: 100%; width: 100%;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; padding: 15px">
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <colgroup>
+                                    <col span="0" style="width: 68px;">
+                                    <col span="0" style="width: 92px;">
+                                    <col span="1" style="width: 15%;">
+                                 </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <tbody>
+                                    <colgroup>
+                                        <col span="0" style="width: 68px;">
+                                        <col span="0" style="width: 92px;">
+                                        <col span="1" style="width: 15%;">
+                                     </colgroup>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buyTicket">
+                <button>Купить</button>
+            </div>
+        </div>
+        <div class="ticket">
+            <div class="titleTicket">
+                <div style="text-align: center;">
+                    Москва ->🚘✈️🚂-> Пермь
+                </div>
+                <div style="height: 2px; width: 90%; margin-left:5%; background-color: gray; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="bodyTicket">
+                <div style="display: flex; flex-direction: row;">
+                    <div>
+                        <div class="ShowPicture">
+                            <div id="picture">
+                                Наведи на меня
+                            </div>
+                            <div id="smena_kanpo_taymeru">
+                                <img class="knopasa" src="https://zornet.ru/_fr/83/9570064.gif" style="height: 100%; width: 100%;" />
+                                <img class="vesan" src="https://zornet.ru/_fr/83/6999157.jpg" style="height: 100%; width: 100%;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; padding: 15px">
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <colgroup>
+                                    <col span="0" style="width: 68px;">
+                                    <col span="0" style="width: 92px;">
+                                    <col span="1" style="width: 15%;">
+                                 </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <tbody>
+                                    <colgroup>
+                                        <col span="0" style="width: 68px;">
+                                        <col span="0" style="width: 92px;">
+                                        <col span="1" style="width: 15%;">
+                                     </colgroup>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buyTicket">
+                <button>Купить</button>
+            </div>
+        </div>
+        <div class="ticket">
+            <div class="titleTicket">
+                <div style="text-align: center;">
+                    Москва ->🚘✈️🚂-> Пермь
+                </div>
+                <div style="height: 2px; width: 90%; margin-left:5%; background-color: gray; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="bodyTicket">
+                <div style="display: flex; flex-direction: row;">
+                    <div>
+                        <div class="ShowPicture">
+                            <div id="picture">
+                                Наведи на меня
+                            </div>
+                            <div id="smena_kanpo_taymeru">
+                                <img class="knopasa" src="https://zornet.ru/_fr/83/9570064.gif" style="height: 100%; width: 100%;" />
+                                <img class="vesan" src="https://zornet.ru/_fr/83/6999157.jpg" style="height: 100%; width: 100%;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; padding: 15px">
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <colgroup>
+                                    <col span="0" style="width: 68px;">
+                                    <col span="0" style="width: 92px;">
+                                    <col span="1" style="width: 15%;">
+                                 </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <tbody>
+                                    <colgroup>
+                                        <col span="0" style="width: 68px;">
+                                        <col span="0" style="width: 92px;">
+                                        <col span="1" style="width: 15%;">
+                                     </colgroup>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buyTicket">
+                <button>Купить</button>
+            </div>
+        </div>
+        <div class="ticket">
+            <div class="titleTicket">
+                <div style="text-align: center;">
+                    Москва ->🚘✈️🚂-> Пермь
+                </div>
+                <div style="height: 2px; width: 90%; margin-left:5%; background-color: gray; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="bodyTicket">
+                <div style="display: flex; flex-direction: row;">
+                    <div>
+                        <div class="ShowPicture">
+                            <div id="picture">
+                                Наведи на меня
+                            </div>
+                            <div id="smena_kanpo_taymeru">
+                                <img class="knopasa" src="https://zornet.ru/_fr/83/9570064.gif" style="height: 100%; width: 100%;" />
+                                <img class="vesan" src="https://zornet.ru/_fr/83/6999157.jpg" style="height: 100%; width: 100%;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; padding: 15px">
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <colgroup>
+                                    <col span="0" style="width: 68px;">
+                                    <col span="0" style="width: 92px;">
+                                    <col span="1" style="width: 15%;">
+                                 </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <tbody>
+                                    <colgroup>
+                                        <col span="0" style="width: 68px;">
+                                        <col span="0" style="width: 92px;">
+                                        <col span="1" style="width: 15%;">
+                                     </colgroup>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buyTicket">
+                <button>Купить</button>
+            </div>
+        </div>
+        <div class="ticket">
+            <div class="titleTicket">
+                <div style="text-align: center;">
+                    Москва ->🚘✈️🚂-> Пермь
+                </div>
+                <div style="height: 2px; width: 90%; margin-left:5%; background-color: gray; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="bodyTicket">
+                <div style="display: flex; flex-direction: row;">
+                    <div>
+                        <div class="ShowPicture">
+                            <div id="picture">
+                                Наведи на меня
+                            </div>
+                            <div id="smena_kanpo_taymeru">
+                                <img class="knopasa" src="https://zornet.ru/_fr/83/9570064.gif" style="height: 100%; width: 100%;" />
+                                <img class="vesan" src="https://zornet.ru/_fr/83/6999157.jpg" style="height: 100%; width: 100%;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; padding: 15px">
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <colgroup>
+                                    <col span="0" style="width: 68px;">
+                                    <col span="0" style="width: 92px;">
+                                    <col span="1" style="width: 15%;">
+                                 </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <tbody>
+                                    <colgroup>
+                                        <col span="0" style="width: 68px;">
+                                        <col span="0" style="width: 92px;">
+                                        <col span="1" style="width: 15%;">
+                                     </colgroup>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buyTicket">
+                <button>Купить</button>
+            </div>
+        </div>
+        <div class="ticket">
+            <div class="titleTicket">
+                <div style="text-align: center;">
+                    Москва ->🚘✈️🚂-> Пермь
+                </div>
+                <div style="height: 2px; width: 90%; margin-left:5%; background-color: gray; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="bodyTicket">
+                <div style="display: flex; flex-direction: row;">
+                    <div>
+                        <div class="ShowPicture">
+                            <div id="picture">
+                                Наведи на меня
+                            </div>
+                            <div id="smena_kanpo_taymeru">
+                                <img class="knopasa" src="https://zornet.ru/_fr/83/9570064.gif" style="height: 100%; width: 100%;" />
+                                <img class="vesan" src="https://zornet.ru/_fr/83/6999157.jpg" style="height: 100%; width: 100%;" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: row; padding: 15px">
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <colgroup>
+                                    <col span="0" style="width: 68px;">
+                                    <col span="0" style="width: 92px;">
+                                    <col span="1" style="width: 15%;">
+                                 </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="margin-left: 58px;">
+                                <tbody>
+                                    <colgroup>
+                                        <col span="0" style="width: 68px;">
+                                        <col span="0" style="width: 92px;">
+                                        <col span="1" style="width: 15%;">
+                                     </colgroup>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Москва</td>
+                                        <td>02.02.2024</td>
+                                        <td>02:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buyTicket">
+                <button>Купить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function Switch(place){
+        if ($(place).css("border") == "0px none rgb(33, 37, 41)"){
+            $(place).css({"background-color": "#7fd57f"})
+            $(place).css({"border": "1px outset black"})
+        }
+        else{
+            $(place).css({"background-color": "transparent"})
+            $(place).css({"border": "0px none rgb(33, 37, 41)"})
+        } 
+    }
+</script>

@@ -78,5 +78,16 @@ def token(UserName: str):
             }
     return render_template("base.html", **data)
 
+
+@app.route("/web/ticket", methods=['GET', 'POST'])
+def ticket():
+
+        
+    data = {"user": "man",
+            "includes": "BuyTiket.html",
+            }
+    return render_template("base.html", **data)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
