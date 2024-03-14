@@ -1,6 +1,7 @@
 
-from flask import render_template, Flask
+from flask import render_template, Flask, request, json
 import connexion
+import ast
 
 import requests as rq
 app = Flask(__name__)
@@ -79,10 +80,23 @@ def token(UserName: str):
     return render_template("base.html", **data)
 
 
+@app.route("/web/buy/tiket", methods=['GET'])
+def BuyTiket():
+    count = request.args['count']
+
+    transport = request.args['transport']
+
+    transp = ast.literal_eval(transport)
+    cint = [x for x in range(len(transp))]
+    data = {"user": "man",
+            "count": count,
+            "iter": cint,
+            "transport": transp}
+    
+    return render_template("windowBuy.html", **data)
+
 @app.route("/web/ticket", methods=['GET', 'POST'])
 def ticket():
-
-        
     data = {"user": "man",
             "includes": "BuyTiket.html",
             }

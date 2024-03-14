@@ -22,6 +22,36 @@ async function FindTiket(){
                                                     body: JSON.stringify(data)})
     var info = JSON.parse(await answer.text())
     
+    for(i in info){
+        random_minute = myRandom(myHour, myMinutes)
+        start_data = data['date'].split("-")
+        start_data = start_data[2] + "." + start_data[1] + "." + start_data[0]
+
+        for(j in info[i]){
+            info[i][j]['start-date'] = start_data
+            info[i][j]['start-time'] = random_minute
+            times = myRandom(myHour, myMinutes)
+            if (random_minute > times){
+                date = info[i][j]['start-date'].split(".")
+                s = parseInt(date[0]) + 1
+                s < 10 ? s = "0"+s : s
+                new_date = s + "." + date[1] + "." + date[2]
+                
+                info[i][j]['end-date'] = new_date
+                info[i][j]['end-time'] = times
+                
+                random_minute = times
+                start_data = new_date
+            }
+            else{
+                info[i][j]['end-date'] = start_data
+                info[i][j]['end-time'] = times
+                
+                random_minute = times
+                start_data = info[i][j]['end-date']
+            }
+        }
+    }
     
     $(".list").empty();
     for(i in info){
@@ -63,14 +93,15 @@ async function FindTiket(){
                             <tbody>`
         table = ""
         time = "02:30"
+        date = []
         for(j in info[i]){
-            table += `<tr> <td>${info[i][j]['start']}</td> <td>${data['date']}</td> <td>02:30</td></tr>`
+            table += `<tr> <td>${info[i][j]['start']}</td> <td>${info[i][j]['start-date']}</td> <td>${info[i][j]['start-time']}</td></tr>`
         }
         table += `</tbody>
         </table>
     </div>
     <div>
-        <table style="width: 236px;">
+        <table style="width: 236px; margin-left: 30px;">
             <tbody>
                 <colgroup>
                     <col span="0" style="width: 74px;">
@@ -79,7 +110,7 @@ async function FindTiket(){
                  </colgroup>`
         table_2 = ""
         for(j in info[i]){
-            table_2 += `<tr> <td>${info[i][j]['end']}</td> <td>${data['date']}</td> <td>02:30</td></tr>`
+            table_2 += `<tr> <td>${info[i][j]['end']}</td> <td>${info[i][j]['end-date']}</td> <td>${info[i][j]['end-time']}</td></tr>`
         }
         table_2 += ` </tbody>
         </table>
@@ -88,10 +119,39 @@ async function FindTiket(){
 </div>
 </div>
 <div class="buyTicket">
-<button>Купить</button>
+<button onclick="Buy(this)">Купить</button>
 </div>
 </div>`
         text = first_poz + table + table_2
         $(".list").append(text)
     }
+}
+
+async function Buy(place){
+    table = $($(place).parent("div").parent("div")).find(".bodyTicket table")
+    count = 0
+    info = []
+    $($($(table[0]).children()[1]).children()).each(function(){
+        info[count] = {"start": $($(this).children()[0]).text().trim(),
+                       "date-Start": $($(this).children()[1]).text().trim(),
+                       "time-Start": $($(this).children()[2]).text().trim(),
+                       "end": null,
+                       "date-end": null,
+                       "time-end": null
+                    }
+        count +=1
+    } 
+    )
+    s = 0
+    $($($(table[1]).children()[2]).children()).each(function(){
+        info[s]['end'] = $($(this).children()[0]).text().trim()
+        info[s]["date-end"] = $($(this).children()[1]).text().trim()
+        info[s]["time-end"] = $($(this).children()[2]).text().trim()
+        s+=1
+    } 
+    )
+    
+    var arrStr = encodeURIComponent(JSON.stringify(info));
+    location.href = `http://127.0.0.1:8000/web/buy/tiket?count=${count}&transport=${arrStr}`;
+
 }
